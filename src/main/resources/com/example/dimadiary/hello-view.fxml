@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dimadiary.HelloController">
+   <children>
+      <Pane layoutX="-1.0" layoutY="1.0" prefHeight="621.0" prefWidth="810.0">
+         <children>
+            <TextArea fx:id="text" layoutX="17.0" layoutY="14.0" prefHeight="563.0" prefWidth="779.0" />
+            <Button layoutX="598.0" layoutY="588.0" mnemonicParsing="false" onAction="#findByRecord" prefHeight="31.0" prefWidth="179.0" text="найти запись по дате">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="414.0" layoutY="588.0" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="168.0" text="сохранить">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="searchSystem" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #ADD8E6;" visible="false">
+         <children>
+            <TextField fx:id="search" layoutX="299.0" layoutY="175.0" prefHeight="78.0" prefWidth="197.0" />
+            <Label fx:id="instructions" layoutX="116.0" layoutY="57.0" prefHeight="65.0" prefWidth="562.0" text="Введите дату написания записи которую хотите посмотреть" textOverrun="LEADING_ELLIPSIS">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="313.0" layoutY="288.0" mnemonicParsing="false" onAction="#find" prefHeight="40.0" prefWidth="168.0" text="НАЙТИ" />
+            <Button layoutX="313.0" layoutY="354.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
+            <Label layoutX="293.0" layoutY="110.0" prefHeight="40.0" prefWidth="197.0" text="формат даты: гггг-мм-дд">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="goToTheEntry" layoutX="314.0" layoutY="424.0" mnemonicParsing="false" onAction="#goTo" prefHeight="40.0" prefWidth="168.0" text="перейти к записе" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
