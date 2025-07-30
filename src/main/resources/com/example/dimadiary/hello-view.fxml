@@ -34,7 +34,7 @@
                </font>
             </Label>
             <Button layoutX="313.0" layoutY="288.0" mnemonicParsing="false" onAction="#find" prefHeight="40.0" prefWidth="168.0" text="НАЙТИ" />
-            <Button layoutX="313.0" layoutY="354.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
+            <Button fx:id="backToMenu" layoutX="313.0" layoutY="354.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
             <Label layoutX="293.0" layoutY="110.0" prefHeight="40.0" prefWidth="197.0" text="формат даты: гггг-мм-дд">
                <font>
                   <Font size="16.0" />
@@ -45,6 +45,17 @@
                   <Font size="16.0" />
                </font>
             </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="mainMenu" prefHeight="636.0" prefWidth="818.0" style="-fx-background-color: #90EE90;">
+         <children>
+            <Button layoutX="306.0" layoutY="205.0" mnemonicParsing="false" onAction="#begin" prefHeight="40.0" prefWidth="191.0" text="Перейти к сегоднешней записи" />
+            <Label layoutX="253.0" layoutY="111.0" prefHeight="65.0" prefWidth="313.0" text="Добро пожаловать!!" textFill="RED">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Button layoutX="306.0" layoutY="267.0" mnemonicParsing="false" onAction="#startFind" prefHeight="40.0" prefWidth="191.0" text="Найти запись по дате" />
          </children>
       </Pane>
    </children>
