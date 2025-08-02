@@ -1,10 +1,15 @@
 package com.example.dimadiary;
 
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,18 +55,32 @@ public class HelloController {
         private Button backToMenu;
 
 
+    public void stopPrograms(){
+        instructions.setText("");
+    }
+
+
 
         @FXML
-        void find (ActionEvent event){
+        void find (ActionEvent event) {
 
-        if (dates.contains(search.getText())) {
-            instructions.setText("Запись найдена, что бы перейти найжмите на кнопку с низу");
-            goToTheEntry.setVisible(true);
-        } else {
-            instructions.setText("        Такого текста не существует, попробуйте снова");
-            goToTheEntry.setVisible(false);
+            String dateRegex = "^\\d{4}-\\d{2}-\\d{2}$";
+
+            Pattern pattern = Pattern.compile(dateRegex);
+            Matcher matcher = pattern.matcher(search.getText());
+            if (matcher.matches()) {
+                if (dates.contains(search.getText())) {
+                    instructions.setText("Запись найдена, что бы перейти найжмите на кнопку с низу");
+                    goToTheEntry.setVisible(true);
+                } else {
+                    instructions.setText("        Такой записи не существует, попробуйте снова");
+                    goToTheEntry.setVisible(false);
+                }
+            }
+            else {
+                instructions.setText("       Вы ввели неверный формат даты, попробуйте снова");
+            }
         }
-    }
 
         @FXML
         void goTo (ActionEvent event){
@@ -95,6 +114,11 @@ public class HelloController {
         if (dates.contains(a)) {
 
             text.setText(list.get(0));
+            mainMenu.setVisible(false);
+            one = true;
+        }
+        else {
+            text.setText("");
             mainMenu.setVisible(false);
             one = true;
         }
