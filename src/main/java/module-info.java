@@ -11,6 +11,8 @@ module com.example.dimadiary {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires jdk.jsobject;
+    requires org.json;
 
     opens com.example.dimadiary to javafx.fxml;
     exports com.example.dimadiary;

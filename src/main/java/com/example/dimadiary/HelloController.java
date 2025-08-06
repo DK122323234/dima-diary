@@ -5,11 +5,13 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,15 +19,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import netscape.javascript.JSObject;
 
 public class HelloController {
-
-        ArrayList<String> list = returningEntries();
-        ArrayList<String> dates = returningData();
+        private String date;
+        private Note note = new Note();
         boolean save = false;
-        private int index;
         boolean one = false;
         boolean menuAndBack = false;
+
 
         @FXML
         private Pane mainMenu;
@@ -64,17 +67,28 @@ public class HelloController {
         @FXML
         void find (ActionEvent event) {
 
-            String dateRegex = "^\\d{4}-\\d{2}-\\d{2}$";
+            String dateRegex = "^(?!0)\\d{4}-\\d{2}-\\d{2}$";
 
             Pattern pattern = Pattern.compile(dateRegex);
             Matcher matcher = pattern.matcher(search.getText());
             if (matcher.matches()) {
-                if (dates.contains(search.getText())) {
-                    instructions.setText("Запись найдена, что бы перейти найжмите на кнопку с низу");
-                    goToTheEntry.setVisible(true);
-                } else {
-                    instructions.setText("        Такой записи не существует, попробуйте снова");
-                    goToTheEntry.setVisible(false);
+                date = search.getText();
+                String a = note.loadFromFile(date);
+
+                switch (a) {
+                    case "Такой записи не существует" -> {
+                        instructions.setText("Такой записи не существует или файл с ней был потерян");
+                        System.out.println("dd");
+                    }
+                    case "Папка \"dataRecords\" не найдена" ->
+                            instructions.setText("                      Папка \"dataRecords\" не найдена");
+                    case "файл содержит текст в неправильном формате" ->
+                            instructions.setText("файл " + date + " содержит текст в неправильном формате");
+                    default -> {
+                        text.setText(note.loadFromFile(date));
+                        goToTheEntry.setVisible(true);
+                        System.out.println("DYDY");
+                    }
                 }
             }
             else {
@@ -84,16 +98,14 @@ public class HelloController {
 
         @FXML
         void goTo (ActionEvent event){
-            index = dates.indexOf(search.getText());
-            if (index != -1 && index < list.size()) {
-                text.setText(list.get(index));
-                menuAndBack = false;
-            } else {
-                instructions.setText("Запись не найдена.");
-            }
+
+        text.setText( note.loadFromFile(search.getText()));
+      date = search.getText();
             searchSystem.setVisible(false);
             save = true;
             search.setText("");
+            menuAndBack = false;
+            searchSystem.setVisible(false);
             goToTheEntry.setVisible(false);
         }
 
@@ -107,21 +119,19 @@ public class HelloController {
 
     @FXML
     void begin(ActionEvent event) {
-        String a = LocalDate.now().toString();
-        recordingDates(dates);
-        recordingEntries(list);
-        index = dates.indexOf(search.getText());
-        if (dates.contains(a)) {
 
-            text.setText(list.get(0));
-            mainMenu.setVisible(false);
-            one = true;
-        }
-        else {
+        String a = LocalDate.now().toString();
+
+         if (note.loadFromFile(LocalDate.now().toString()).equals("Такой записи не существует")){
             text.setText("");
-            mainMenu.setVisible(false);
-            one = true;
-        }
+         }
+        else {
+             note.loadFromFile(a);
+             text.setText(note.loadFromFile(LocalDate.now().toString()));
+         }
+
+         mainMenu.setVisible(false);
+         one = true;
 
 
         }
@@ -149,96 +159,21 @@ public class HelloController {
     }
 
         @FXML
-        void save (ActionEvent event){
-
-            LocalDate now = LocalDate.now();
-            String todayDate = String.valueOf(now);
-
-            if (save) {
-                if (index < list.size()) {
-                    list.set(index, text.getText());
-                } else {
-                    System.out.println("Ошибка");
-                }
-                recordingDates(dates);
-                recordingEntries(list);
-            } else {
-                if (dates.isEmpty() || !dates.get(dates.size() - 1).equals(todayDate)) {
-                    list.add(text.getText());
-                    dates.add(todayDate);
-                    recordingDates(dates);
-                    recordingEntries(list);
-                } else {
-                    list.add(text.getText());
-                    recordingDates(dates);
-                    recordingEntries(list);
-                }
-            }
-            if (one){
-                index = dates.indexOf( LocalDate.now().toString());
-                list.set(index, text.getText());
-                recordingDates(dates);
-                recordingEntries(list);
-
+        void save (ActionEvent event) {
+            if (one) {
+                note.savingToFile(LocalDate.now().toString(), text.getText());
+                one = false;
 
             }
-    }
+              else {
+                note.savingToFile(date, text.getText());
 
-
-        private void recordingDates (ArrayList < String > dates) {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Data"));
-            objectOutputStream.writeObject(dates);
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
+            }
         }
-        }
-    private static ArrayList<String> returningData() {
-        ArrayList<String> dates = new ArrayList<>();
-        File file = new File("Data");
-        if (!file.exists()) {
-            System.err.println("Файл не найден");
-            return dates;
-        }
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-            dates = (ArrayList<String>) objectInputStream.readObject();
-        } catch (EOFException e) {
-            System.err.println("Ошибка если файл пуст: " + e.getMessage());
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Ошибка при чтении данных: " + e.getMessage());
-        }
-        return dates;
-    }
-    private void recordingEntries (ArrayList < String > dates) {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Entries"));
-            objectOutputStream.writeObject(dates);
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private static ArrayList<String> returningEntries() {
-        ArrayList<String> dates = new ArrayList<>();
-        File file = new File("Entries");
-        if (!file.exists()) {
-            System.err.println("Файл не найден");
-            return dates;
-        }
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-            dates = (ArrayList<String>) objectInputStream.readObject();
-        } catch (EOFException e) {
-            System.err.println("Ошибка если файл пуст: " + e.getMessage());
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Ошибка при чтении данных: " + e.getMessage());
-        }
-        return dates;
-    }
-
 
 
     @FXML
         void initialize () {
-        dates = returningData();
         assert instructions != null : "fx:id=\"instructions\" was not injected: check your FXML file 'hello-view.fxml'.";
         assert search != null : "fx:id=\"search\" was not injected: check your FXML file 'hello-view.fxml'.";
         assert searchSystem != null : "fx:id=\"searchSystem\" was not injected: check your FXML file 'hello-view.fxml'.";
