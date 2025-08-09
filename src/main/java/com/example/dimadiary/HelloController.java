@@ -29,6 +29,14 @@ public class HelloController {
         boolean one = false;
         boolean menuAndBack = false;
 
+        @FXML
+        private TextField search1;
+
+        @FXML
+        private Label instructions1;
+
+        @FXML
+        private Pane recordingOnDateMenu;
 
         @FXML
         private Pane mainMenu;
@@ -110,6 +118,42 @@ public class HelloController {
         }
 
     @FXML
+    void writeDownTheDate(ActionEvent event) {
+        recordingOnDateMenu.setVisible(true);
+        menuAndBack = false;
+
+    }
+    @FXML
+    void writeDownTheDate1(ActionEvent event) {
+        recordingOnDateMenu.setVisible(true);
+        menuAndBack = true;
+
+    }
+    @FXML
+    void makeARecording(ActionEvent event) {
+        String dateRegex = "^(?!0)\\d{4}-\\d{2}-\\d{2}$";
+        Pattern pattern = Pattern.compile(dateRegex);
+        Matcher matcher = pattern.matcher(search1.getText());
+        if(matcher.matches()){
+            ComplianceCheck complianceCheck = new ComplianceCheck();
+            if (complianceCheck.check(search1.getText())){
+
+                recordingOnDateMenu.setVisible(false);
+                mainMenu.setVisible(false);
+                date = search1.getText();
+              menuAndBack = false;
+            }
+           else {
+               instructions1.setText("       Вы ввели несуществующую дату, попробуйте снова");
+            }
+
+        }
+        else {
+            instructions1.setText("       Вы ввели неверный формат даты, попробуйте снова");
+        }
+    }
+
+    @FXML
     void startFind(ActionEvent event) {
             mainMenu.setVisible(false);
             searchSystem.setVisible(true);
@@ -119,11 +163,13 @@ public class HelloController {
 
     @FXML
     void begin(ActionEvent event) {
-
+        menuAndBack = false;
+        date = LocalDate.now().toString();
         String a = LocalDate.now().toString();
 
          if (note.loadFromFile(LocalDate.now().toString()).equals("Такой записи не существует")){
             text.setText("");
+
          }
         else {
              note.loadFromFile(a);
@@ -143,9 +189,14 @@ public class HelloController {
                 searchSystem.setVisible(false);
                 search.setText("");
                 goToTheEntry.setVisible(false);
+                recordingOnDateMenu.setVisible(false);
+                mainMenu.setVisible(false);
+                System.out.println("S");
             }
         if (menuAndBack){
+            System.out.println("ss");
            searchSystem.setVisible(false);
+           recordingOnDateMenu.setVisible(false);
            mainMenu.setVisible(true);
            menuAndBack = false;
 
@@ -156,6 +207,7 @@ public class HelloController {
         @FXML
         void findByRecord (ActionEvent event){
         searchSystem.setVisible(true);
+        menuAndBack = false;
     }
 
         @FXML
@@ -163,6 +215,7 @@ public class HelloController {
             if (one) {
                 note.savingToFile(LocalDate.now().toString(), text.getText());
                 one = false;
+                date = LocalDate.now().toString();
 
             }
               else {

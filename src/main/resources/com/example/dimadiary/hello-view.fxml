@@ -23,6 +23,11 @@
                   <Font size="15.0" />
                </font>
             </Button>
+            <Button layoutX="200.0" layoutY="588.0" mnemonicParsing="false" onAction="#writeDownTheDate" prefHeight="31.0" prefWidth="197.0" text="записать на любую дату">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="searchSystem" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #ADD8E6;" visible="false">
@@ -47,7 +52,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="mainMenu" prefHeight="636.0" prefWidth="818.0" style="-fx-background-color: #90EE90;">
+      <Pane fx:id="mainMenu" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #90EE90;">
          <children>
             <Button layoutX="306.0" layoutY="205.0" mnemonicParsing="false" onAction="#begin" prefHeight="40.0" prefWidth="191.0" text="Перейти к сегоднешней записи" />
             <Label layoutX="253.0" layoutY="111.0" prefHeight="65.0" prefWidth="313.0" text="Добро пожаловать!!" textFill="RED">
@@ -56,6 +61,24 @@
                </font>
             </Label>
             <Button layoutX="306.0" layoutY="267.0" mnemonicParsing="false" onAction="#startFind" prefHeight="40.0" prefWidth="191.0" text="Найти запись по дате" />
+            <Button layoutX="306.0" layoutY="329.0" mnemonicParsing="false" onAction="#writeDownTheDate1" prefHeight="40.0" prefWidth="191.0" text="Сделать запись на любую дату" />
+         </children>
+      </Pane>
+      <Pane fx:id="recordingOnDateMenu" prefHeight="637.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" visible="false">
+         <children>
+            <TextField fx:id="search1" layoutX="299.0" layoutY="175.0" prefHeight="78.0" prefWidth="197.0" />
+            <Label fx:id="instructions1" layoutX="116.0" layoutY="57.0" prefHeight="65.0" prefWidth="562.0" text="     Введите дату написания записи которую котите написать" textOverrun="LEADING_ELLIPSIS">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="313.0" layoutY="288.0" mnemonicParsing="false" onAction="#makeARecording" prefHeight="40.0" prefWidth="168.0" text="СДЕЛАТЬ ЗАПИСЬ" />
+            <Button layoutX="313.0" layoutY="354.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
+            <Label layoutX="293.0" layoutY="110.0" prefHeight="40.0" prefWidth="197.0" text="формат даты: гггг-мм-дд">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

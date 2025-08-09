@@ -21,7 +21,7 @@ public class Note {
     public void savingToFile(String date, String entries) {
         File directory = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
         if (directory.exists()) {
-            File file = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + date + ".txt");
+            File file = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + date + ".json");
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file));) {
                 JSONObject jsonObject = new JSONObject();
 
@@ -37,9 +37,14 @@ public class Note {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION,"Папка \"dataRecords\" не найдена");
-            alert.showAndWait();
+           String directoryPath = "C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords";
+            File directory1 = new File(directoryPath);
+                 directory1.mkdir();
+                 Note note = new Note();
+                 note.savingToFile(date, entries);
+
         }
+
 
 
     }
@@ -47,10 +52,10 @@ public class Note {
     public String loadFromFile(String name){
         File directory = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
         if (directory.exists()){
-            File nameFile = new File(directory, name + ".txt");
+            File nameFile = new File(directory, name + ".json");
             if (nameFile.exists()){
                 System.out.println();
-                 String path = "C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + name + ".txt";
+                 String path = "C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + name + ".json";
 
                 try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
                   String line = bufferedReader.readLine();
@@ -70,7 +75,11 @@ public class Note {
             }
         }
         else {
-            text = "Папка \"dataRecords\" не найдена";
+            File directory1 = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
+            directory1.mkdir();
+            Note note = new Note();
+            text = note.loadFromFile(name);
+
         }
         return text;
     }
