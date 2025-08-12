@@ -15,13 +15,14 @@ import static java.awt.SystemColor.text;
 
 public class Note {
   private String text = "";
+  String homePath = System.getProperty("user.home");
 
 
 
     public void savingToFile(String date, String entries) {
-        File directory = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
+        File directory = new File(homePath + "\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
         if (directory.exists()) {
-            File file = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + date + ".json");
+            File file = new File( homePath + "\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + date + ".json");
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file));) {
                 JSONObject jsonObject = new JSONObject();
 
@@ -37,7 +38,7 @@ public class Note {
             }
         }
         else {
-           String directoryPath = "C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords";
+           String directoryPath = homePath + "\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords";
             File directory1 = new File(directoryPath);
                  directory1.mkdir();
                  Note note = new Note();
@@ -50,12 +51,12 @@ public class Note {
     }
 
     public String loadFromFile(String name){
-        File directory = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
+        File directory = new File(homePath + "\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
         if (directory.exists()){
             File nameFile = new File(directory, name + ".json");
             if (nameFile.exists()){
                 System.out.println();
-                 String path = "C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + name + ".json";
+                 String path = homePath + "\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords\\" + name + ".json";
 
                 try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
                   String line = bufferedReader.readLine();
@@ -75,7 +76,7 @@ public class Note {
             }
         }
         else {
-            File directory1 = new File("C:\\Users\\dkame\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
+            File directory1 = new File(homePath + "\\OneDrive\\Изображения\\Desktop\\IdeaProjects\\Dima-diary\\dataRecords");
             directory1.mkdir();
             Note note = new Note();
             text = note.loadFromFile(name);
