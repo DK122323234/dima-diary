@@ -1,8 +1,7 @@
 package com.example.dimadiary;
 
 import javafx.scene.control.Alert;
-import netscape.javascript.JSException;
-import netscape.javascript.JSObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

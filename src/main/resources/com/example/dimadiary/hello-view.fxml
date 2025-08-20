@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -9,11 +10,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dimadiary.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dimadiary.HelloController">
    <children>
       <Pane layoutX="-1.0" layoutY="1.0" prefHeight="621.0" prefWidth="810.0">
          <children>
-            <TextArea fx:id="text" layoutX="17.0" layoutY="14.0" prefHeight="563.0" prefWidth="779.0" />
             <Button layoutX="628.0" layoutY="588.0" mnemonicParsing="false" onAction="#findByRecord" prefHeight="31.0" prefWidth="168.0" text="найти запись по дате">
                <font>
                   <Font size="15.0" />
@@ -29,7 +29,8 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="292.0" layoutY="588.0" mnemonicParsing="false" onAction="#writeDownTheDate" prefHeight="31.0" prefWidth="197.0" text="не работает пока что">
+            <TextArea fx:id="text" layoutX="17.0" layoutY="14.0" prefHeight="563.0" prefWidth="779.0" />
+            <Button layoutX="292.0" layoutY="588.0" mnemonicParsing="false" onAction="#writeDownTheDate" prefHeight="31.0" prefWidth="197.0" text="записать на любую дату">
                <font>
                   <Font size="15.0" />
                </font>
@@ -56,6 +57,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
+            <Button layoutX="310.0" layoutY="418.0" mnemonicParsing="false" onAction="#words" prefHeight="46.0" prefWidth="177.0" text="Найти запись по словам" />
          </children>
       </Pane>
       <Pane fx:id="mainMenu" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #90EE90;">
@@ -68,23 +70,19 @@
             </Label>
             <Button layoutX="306.0" layoutY="267.0" mnemonicParsing="false" onAction="#startFind" prefHeight="40.0" prefWidth="191.0" text="Найти запись по дате" />
             <Button layoutX="306.0" layoutY="329.0" mnemonicParsing="false" onAction="#writeDownTheDate1" prefHeight="40.0" prefWidth="191.0" text="Сделать запись на любую дату" />
+            <Button layoutX="306.0" layoutY="395.0" mnemonicParsing="false" onAction="#words" prefHeight="40.0" prefWidth="191.0" text="Найти запись по словам" />
          </children>
       </Pane>
       <Pane fx:id="recordingOnDateMenu" prefHeight="637.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" visible="false">
          <children>
-            <Label fx:id="instructions1" layoutX="116.0" layoutY="57.0" prefHeight="65.0" prefWidth="562.0" text="         НЕ ЧЕГО НЕ ТРОГАТЬ ПРОГРАММА СЛОМАЕТСЯ" textOverrun="LEADING_ELLIPSIS">
+            <Label fx:id="instructions1" layoutX="118.0" layoutY="114.0" prefHeight="65.0" prefWidth="562.0" text="        Выберите дату на которую хотите сделать запись" textOverrun="LEADING_ELLIPSIS">
                <font>
-                  <Font size="20.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
-            <Button layoutX="313.0" layoutY="470.0" mnemonicParsing="false" onAction="#makeARecording" prefHeight="40.0" prefWidth="168.0" text="СДЕЛАТЬ ЗАПИСЬ" />
-            <Button layoutX="313.0" layoutY="530.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
-            <ImageView fx:id="photo" fitHeight="244.0" fitWidth="486.0" layoutX="162.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="makeARecording1" layoutX="313.0" layoutY="407.0" mnemonicParsing="false" onAction="#makeARecording1" prefHeight="40.0" prefWidth="168.0" text="выбрать фото">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
+            <Button layoutX="314.0" layoutY="319.0" mnemonicParsing="false" onAction="#makeARecording" prefHeight="40.0" prefWidth="168.0" text="СДЕЛАТЬ ЗАПИСЬ" />
+            <Button layoutX="313.0" layoutY="378.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
+            <DatePicker fx:id="calendar" layoutX="300.0" layoutY="231.0" prefHeight="32.0" prefWidth="197.0" />
          </children>
       </Pane>
       <Pane fx:id="menuPhoto" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #FFFF50;" visible="false">
@@ -102,13 +100,32 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="error" layoutX="249.0" layoutY="14.0" prefHeight="58.0" prefWidth="313.0">
+            <Label fx:id="error" layoutX="200.0" layoutY="203.0" prefHeight="130.0" prefWidth="407.0">
                <font>
-                  <Font size="19.0" />
+                  <Font size="23.0" />
                </font>
             </Label>
             <Button fx:id="backToMenu1" layoutX="301.0" layoutY="549.0" mnemonicParsing="false" onAction="#goBack" prefHeight="46.0" prefWidth="211.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
          </children>
       </Pane>
+      <Pane fx:id="wordsMenu" prefHeight="626.0" prefWidth="818.0" style="-fx-background-color: #FFFFFF;" visible="false">
+         <children>
+            <TextField fx:id="searchWords" layoutX="299.0" layoutY="130.0" prefHeight="46.0" prefWidth="205.0" />
+            <Label fx:id="instructions2" layoutX="7.0" layoutY="29.0" prefHeight="101.0" prefWidth="804.0" text="                                                        ВВЕДИТЕ СЛОВО(А) ДЛЯ ПРОИСКА ЗАМЕТОК С НИМ(И)">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="backToMenu2" layoutX="318.0" layoutY="262.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="168.0" text="ВЕРНУТЬСЯ ОБРАТНО" />
+            <Button layoutX="318.0" layoutY="203.0" mnemonicParsing="false" onAction="#startSearching" prefHeight="40.0" prefWidth="168.0" text="ИСКАТЬ" />
+            <Button fx:id="next1" layoutX="727.0" layoutY="573.0" mnemonicParsing="false" onAction="#next1" prefHeight="40.0" prefWidth="58.0" text="-&gt;" visible="false" />
+            <Button fx:id="previous1" layoutX="648.0" layoutY="573.0" mnemonicParsing="false" onAction="#previous1" prefHeight="40.0" prefWidth="58.0" text="&lt;-" visible="false" />
+            <Button fx:id="two" layoutX="352.0" layoutY="393.0" mnemonicParsing="false" onAction="#two" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ADD8E6;" visible="false" />
+            <Button fx:id="three" layoutX="352.0" layoutY="454.0" mnemonicParsing="false" onAction="#three" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ADD8E6;" visible="false" />
+            <Button fx:id="four" layoutX="352.0" layoutY="522.0" mnemonicParsing="false" onAction="#four" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ADD8E6;" visible="false" />
+            <Label fx:id="bags" layoutX="12.0" layoutY="580.0" prefHeight="22.0" prefWidth="779.0" />
+         </children>
+      </Pane>
+      <Button fx:id="one" layoutX="355.0" layoutY="329.0" mnemonicParsing="false" onAction="#one" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ADD8E6;" visible="false" />
    </children>
 </AnchorPane>

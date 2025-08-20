@@ -8,10 +8,8 @@ module com.example.dimadiary {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
-    requires jdk.jsobject;
     requires org.json;
 
     opens com.example.dimadiary to javafx.fxml;
