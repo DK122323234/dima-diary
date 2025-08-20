@@ -16,7 +16,6 @@ jobs:
         #  - windows-latest  # Windows x64
           - ubuntu-latest   # Linux x64
         #  - ubuntu-arm64    # Linux ARM64
-        tag-release: [true, false]
 
     steps:
       - name: Checkout code
