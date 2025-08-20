@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '23'
-          distribution: 'azul'  # или 'temurin', 'adoptium'
+          distribution: 'temurin'  # или 'temurin', 'adoptium'
           # Убедитесь, что JDK 23 включает JavaFX
           cache: maven
 
@@ -59,7 +59,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '23'
-          distribution: 'azul'  # или 'temurin', 'adoptium'
+          distribution: 'temurin'  # или 'temurin', 'adoptium'
           cache: maven
 
       - name: Build with tests
