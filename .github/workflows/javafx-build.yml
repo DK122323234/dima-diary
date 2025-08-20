@@ -44,7 +44,7 @@ jobs:
         run: |
           mvn --batch-mode clean package
           mkdir -p target/fat-jar
-          cp target/*.jar target/fat-jar/dima-diary-with-dependencies.jar
+          cp target/*.jar target/fat-jar/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
