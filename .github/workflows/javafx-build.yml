@@ -30,19 +30,19 @@ jobs:
           cache: maven
 
       - name: Build with tests
-        run: mvn clean verify
+        run: mvn --batch-mode clean verify
 
       - name: Create JLink for tags
         if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
         run: |
-          mvn clean javafx:jlink
+          mvn --batch-mode clean javafx:jlink
           mkdir -p target/jlink/${{ matrix.os }}
           cp -r target/app/* target/jlink/${{ matrix.os }}
 
       - name: Create fat jar for master branch
         if: ${{ github.ref_name == 'master' }}
         run: |
-          mvn clean package
+          mvn --batch-mode clean package
           mkdir -p target/fat-jar
           cp target/*.jar target/fat-jar/dima-diary-with-dependencies.jar
 
