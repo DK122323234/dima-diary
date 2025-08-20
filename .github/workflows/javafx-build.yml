@@ -1,4 +1,4 @@
-name: JavaFX Multi-Platform CI/CD
+name: JavaFX Multi-Platform CI/cd
 
 on:
   push:
@@ -27,8 +27,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '23'
-          distribution: 'temurin'  # или 'temurin', 'adoptium'
-          # Убедитесь, что JDK 23 включает JavaFX
+          distribution: 'temurin'
           cache: maven
 
       - name: Build with tests
@@ -43,7 +42,7 @@ jobs:
       - name: Upload JLink artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: javafx-jlink
+          name: javafx-jlink-${{ matrix.os }}  # Уникальное имя для каждой ОС
           path: target/jlink/${{ matrix.os }}
 
   fat-jar-build:
@@ -59,7 +58,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '23'
-          distribution: 'temurin'  # или 'temurin', 'adoptium'
+          distribution: 'temurin'
           cache: maven
 
       - name: Build with tests
