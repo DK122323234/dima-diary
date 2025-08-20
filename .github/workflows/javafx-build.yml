@@ -1,0 +1,56 @@
+name: JavaFX Multi-Platform CI/CD
+
+on:
+  push:
+    branches:
+      - master  # ← Здесь изменили с main на master
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest  # Windows x64
+          - ubuntu-latest   # Linux x64
+          - ubuntu-arm64    # Linux ARM64
+        tag-release: [true, false]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23 with JavaFX
+        uses: azul-zulu/setup-jdk@v2
+        with:
+          java-version: '23'
+          java-distribution: 'zulu'
+          java-variant: 'fx'
+
+      - name: Build with tests
+        run: mvn clean verify
+
+      - name: Create JLink for tags
+        if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+        run: |
+          mvn clean javafx:jlink
+          mkdir -p target/jlink/${{ matrix.os }}
+          cp -r target/app/* target/jlink/${{ matrix.os }}
+
+      - name: Create fat jar for master branch
+        if: ${{ github.ref_name == 'master' }}  # ← Здесь изменили с main на master
+        run: |
+          mvn clean package
+          mkdir -p target/fat-jar
+          cp target/*.jar target/fat-jar/app.jar
+          cp target/lib/*.jar target/fat-jar/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: javafx-app
+          path: |
+            target/jlink/${{ matrix.os }}
+            target/fat-jar
