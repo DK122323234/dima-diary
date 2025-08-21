@@ -19,22 +19,26 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="499.0" layoutY="588.0" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="113.0" text="сохранить">
+            <Button layoutX="528.0" layoutY="588.0" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="92.0" text="сохранить">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="95.0" layoutY="588.0" mnemonicParsing="false" onAction="#attach" prefHeight="31.0" prefWidth="191.0" text="прикрепить фото">
+            <Button layoutX="167.0" layoutY="588.0" mnemonicParsing="false" onAction="#attach" prefHeight="31.0" prefWidth="144.0" text="прикрепить фото">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
             <TextArea fx:id="text" layoutX="17.0" layoutY="14.0" prefHeight="563.0" prefWidth="779.0" />
-            <Button layoutX="292.0" layoutY="588.0" mnemonicParsing="false" onAction="#writeDownTheDate" prefHeight="31.0" prefWidth="197.0" text="записать на любую дату">
+            <Button layoutX="323.0" layoutY="588.0" mnemonicParsing="false" onAction="#writeDownTheDate" prefHeight="31.0" prefWidth="197.0" text="записать на любую дату">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
+            <Button layoutX="14.0" layoutY="588.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="32.0" prefWidth="144.0" text="вернуться в меню">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </Pane>
       <Pane fx:id="searchSystem" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #ADD8E6;" visible="false">
@@ -60,7 +64,7 @@
             <Button layoutX="310.0" layoutY="418.0" mnemonicParsing="false" onAction="#words" prefHeight="46.0" prefWidth="177.0" text="Найти запись по словам" />
          </children>
       </Pane>
-      <Pane fx:id="mainMenu" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #90EE90;">
+      <Pane fx:id="mainMenu" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #90EE90;" visible="false">
          <children>
             <Button layoutX="306.0" layoutY="205.0" mnemonicParsing="false" onAction="#begin" prefHeight="40.0" prefWidth="191.0" text="Перейти к сегоднешней записи" />
             <Label layoutX="253.0" layoutY="111.0" prefHeight="65.0" prefWidth="313.0" text="Добро пожаловать!!" textFill="RED">
@@ -70,7 +74,9 @@
             </Label>
             <Button layoutX="306.0" layoutY="267.0" mnemonicParsing="false" onAction="#startFind" prefHeight="40.0" prefWidth="191.0" text="Найти запись по дате" />
             <Button layoutX="306.0" layoutY="329.0" mnemonicParsing="false" onAction="#writeDownTheDate1" prefHeight="40.0" prefWidth="191.0" text="Сделать запись на любую дату" />
-            <Button layoutX="306.0" layoutY="395.0" mnemonicParsing="false" onAction="#words" prefHeight="40.0" prefWidth="191.0" text="Найти запись по словам" />
+            <Button layoutX="306.0" layoutY="391.0" mnemonicParsing="false" onAction="#words" prefHeight="40.0" prefWidth="191.0" text="Найти запись по словам" />
+            <Button layoutX="306.0" layoutY="453.0" mnemonicParsing="false" onAction="#transfer" prefHeight="40.0" prefWidth="191.0" text="Перенести все файлы" />
+            <Button layoutX="306.0" layoutY="515.0" mnemonicParsing="false" onAction="#transfer1" prefHeight="40.0" prefWidth="191.0" text="перенести файлы обратно" />
          </children>
       </Pane>
       <Pane fx:id="recordingOnDateMenu" prefHeight="637.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" visible="false">
