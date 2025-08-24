@@ -74,6 +74,12 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-javafx</artifactId>
             <version>12.3.1</version>
@@ -155,7 +161,7 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
+
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.example.dimadiary/com.example.dimadiary.HelloApplication</mainClass>

@@ -11,6 +11,8 @@ module com.example.dimadiary {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires org.json;
+    requires org.apache.httpcomponents.httpclient;
+    requires org.apache.httpcomponents.httpcore;
 
     opens com.example.dimadiary to javafx.fxml;
     exports com.example.dimadiary;
