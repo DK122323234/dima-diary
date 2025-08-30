@@ -15,8 +15,8 @@ import java.util.List;
 
        public class Disk {
            public void saveToDisk(){
-               String token = "y0__xDFyZvRBxjq6Dkgz7y8mhTFsodHmQQ5LLn997ZlNZRGDF_V1A";
-               String url = "https://disk.yandex.ru/d/lLg0bv_mkLKIKQ/";
+               String token = "e79141dc86094a3994acea30c6c81f24";
+               String url = "https://disk.yandex.ru/d/YSBhkTpnIl3hTw";
                String directoryPath;
 
 
@@ -40,9 +40,10 @@ import java.util.List;
 
                        HttpURLConnection httpURLConnection = (HttpURLConnection) url1.openConnection();
                        httpURLConnection.setDoOutput(true);
-                       httpURLConnection.setRequestMethod("GET");
+                       httpURLConnection.setRequestMethod("PUT");
                        httpURLConnection.setRequestProperty("Authorization", "OAuth" + token);
                        httpURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
+                       System.out.println(httpURLConnection);
 
                        if (httpURLConnection.getResponseCode() == 201) {
                        }
