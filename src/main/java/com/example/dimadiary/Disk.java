@@ -4,52 +4,58 @@ import javafx.scene.control.Alert;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
+import javax.imageio.IIOException;
+import java.io.*;
+import java.lang.foreign.UnionLayout;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
-public class Disk {
-   public void saveToDisk(){
-
-       String token = "c83c3b6dff804d6ea38c3c7ba23327c1";
-       String url = "https://cloud-api.yandex.net/v1/disk/resources/upload";
-       String pathDisk;
-       String pathDirectory;
-
-       try {
-           DirectoryChooser directoryChooser = new DirectoryChooser();
-           directoryChooser.setTitle("Выберите папку");
-           Window window = new Stage();
-           File selectedDirectory = directoryChooser.showDialog(window);
-           pathDirectory = selectedDirectory.toString();
-
-           File file = new File(pathDirectory);
-           pathDisk = "disk/" + file.getName();
-           System.out.println(pathDisk);
-           CloseableHttpClient client = HttpClients.createDefault();
-           HttpGet get = new HttpGet(url + "?path=" + pathDisk + "&overwrite=true");
-           get.setHeader("Authorization", "OAuth " + token);
+       public class Disk {
+           public void saveToDisk(){
+               String token = "y0__xDFyZvRBxjq6Dkgz7y8mhTFsodHmQQ5LLn997ZlNZRGDF_V1A";
+               String url = "https://disk.yandex.ru/d/lLg0bv_mkLKIKQ/";
+               String directoryPath;
 
 
-           HttpResponse response = client.execute(get);
-           String jsonResponse = EntityUtils.toString(response.getEntity());
-           JSONObject jsonObject = new JSONObject(jsonResponse);
-           System.out.println(jsonObject);
+               DirectoryChooser directoryChooser = new DirectoryChooser();
+               directoryChooser.setTitle("Выберите папку");
+               Window window = new Stage();
+               File selectedDirectory = directoryChooser.showDialog(window);
+               directoryPath = selectedDirectory.toString();
+
+               File file = new File(directoryPath);
+               if (file.isDirectory()) {
+                   try {
 
 
 
-       } catch (Exception e) {
-           Alert alert = new Alert(Alert.AlertType.INFORMATION, "Произошла ошибка при выборе папки");
-           alert.showAndWait();
-        e.printStackTrace();
+                       URL url1 = new URL(url + "?path="+  file.getName() + "&overwrite=true");
+
+                       System.out.println(url1.toString());
+
+
+                       HttpURLConnection httpURLConnection = (HttpURLConnection) url1.openConnection();
+                       httpURLConnection.setDoOutput(true);
+                       httpURLConnection.setRequestMethod("GET");
+                       httpURLConnection.setRequestProperty("Authorization", "OAuth" + token);
+                       httpURLConnection.setRequestProperty("Content-Type", "application/octet-stream");
+
+                       if (httpURLConnection.getResponseCode() == 201) {
+                       }
+                       else {
+                           System.out.println("фигово");
+
+                       }
+
+
+                   } catch(IOException e){
+                       throw new RuntimeException(e);
+                   }
+
+
+               }
+           }
        }
-
-
-   }
-}
