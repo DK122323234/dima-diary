@@ -32,7 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import kotlin.coroutines.CoroutineContext;
+
 
 import javax.swing.*;
 import javax.swing.text.Element;
