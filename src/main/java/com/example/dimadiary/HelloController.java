@@ -143,8 +143,11 @@ public class HelloController {
     private Button backToMenu;
 
 
-    public void stopPrograms() {
-        instructions.setText("");
+
+    @FXML
+    void saveToDisk(ActionEvent event) {
+      Disk disk = new Disk();
+      disk.saveToDisk();
     }
 
 

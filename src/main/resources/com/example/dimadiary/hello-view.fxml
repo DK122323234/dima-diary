@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dimadiary.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dimadiary.HelloController">
    <children>
       <Pane layoutX="-1.0" layoutY="1.0" prefHeight="621.0" prefWidth="810.0">
          <children>
@@ -64,19 +64,20 @@
             <Button layoutX="310.0" layoutY="418.0" mnemonicParsing="false" onAction="#words" prefHeight="46.0" prefWidth="177.0" text="Найти запись по словам" />
          </children>
       </Pane>
-      <Pane fx:id="mainMenu" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #90EE90;" visible="false">
+      <Pane fx:id="mainMenu" prefHeight="626.0" prefWidth="810.0" style="-fx-background-color: #90EE90;">
          <children>
-            <Button layoutX="306.0" layoutY="205.0" mnemonicParsing="false" onAction="#begin" prefHeight="40.0" prefWidth="191.0" text="Перейти к сегоднешней записи" />
-            <Label layoutX="253.0" layoutY="111.0" prefHeight="65.0" prefWidth="313.0" text="Добро пожаловать!!" textFill="RED">
+            <Button layoutX="188.0" layoutY="201.0" mnemonicParsing="false" onAction="#begin" prefHeight="40.0" prefWidth="191.0" text="Перейти к сегоднешней записи" />
+            <Label layoutX="245.0" layoutY="59.0" prefHeight="65.0" prefWidth="313.0" text="Добро пожаловать!!" textFill="RED">
                <font>
                   <Font size="33.0" />
                </font>
             </Label>
-            <Button layoutX="306.0" layoutY="267.0" mnemonicParsing="false" onAction="#startFind" prefHeight="40.0" prefWidth="191.0" text="Найти запись по дате" />
-            <Button layoutX="306.0" layoutY="329.0" mnemonicParsing="false" onAction="#writeDownTheDate1" prefHeight="40.0" prefWidth="191.0" text="Сделать запись на любую дату" />
-            <Button layoutX="306.0" layoutY="391.0" mnemonicParsing="false" onAction="#words" prefHeight="40.0" prefWidth="191.0" text="Найти запись по словам" />
-            <Button layoutX="306.0" layoutY="453.0" mnemonicParsing="false" onAction="#transfer" prefHeight="40.0" prefWidth="191.0" text="Перенести все файлы" />
-            <Button layoutX="306.0" layoutY="515.0" mnemonicParsing="false" onAction="#transfer1" prefHeight="40.0" prefWidth="191.0" text="перенести файлы обратно" />
+            <Button layoutX="188.0" layoutY="263.0" mnemonicParsing="false" onAction="#startFind" prefHeight="40.0" prefWidth="191.0" text="Найти запись по дате" />
+            <Button layoutX="188.0" layoutY="325.0" mnemonicParsing="false" onAction="#writeDownTheDate1" prefHeight="40.0" prefWidth="191.0" text="Сделать запись на любую дату" />
+            <Button layoutX="402.0" layoutY="325.0" mnemonicParsing="false" onAction="#words" prefHeight="40.0" prefWidth="191.0" text="Найти запись по словам" />
+            <Button layoutX="402.0" layoutY="202.0" mnemonicParsing="false" onAction="#transfer" prefHeight="40.0" prefWidth="191.0" text="Перенести все файлы" />
+            <Button layoutX="402.0" layoutY="264.0" mnemonicParsing="false" onAction="#transfer1" prefHeight="40.0" prefWidth="191.0" text="перенести файлы обратно" />
+            <Button layoutX="292.0" layoutY="387.0" mnemonicParsing="false" onAction="#saveToDisk" prefHeight="40.0" prefWidth="197.0" text="Сохранить папку на яндекс диск" />
          </children>
       </Pane>
       <Pane fx:id="recordingOnDateMenu" prefHeight="637.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" visible="false">
