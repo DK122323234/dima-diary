@@ -11,6 +11,10 @@ module com.example.dimadiary {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires org.json;
+    requires disk.restapi.sdk;
+    requires google.api.client;
+    requires com.fasterxml.jackson.core;
+    requires java.sql;
 
     opens com.example.dimadiary to javafx.fxml;
     exports com.example.dimadiary;
