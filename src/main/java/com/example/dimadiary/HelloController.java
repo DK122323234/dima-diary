@@ -7,6 +7,7 @@ import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import kotlin.coroutines.CoroutineContext;
+
 
 import javax.swing.*;
 import javax.swing.text.Element;
@@ -142,8 +143,11 @@ public class HelloController {
     private Button backToMenu;
 
 
-    public void stopPrograms() {
-        instructions.setText("");
+
+    @FXML
+    void saveToDisk(ActionEvent event) {
+      Disk disk = new Disk();
+      disk.saveToDisk();
     }
 
 
@@ -177,6 +181,25 @@ public class HelloController {
             instructions.setText("       Вы ввели неверный формат даты, попробуйте снова");
         }
     }
+
+    @FXML
+    void transfer(ActionEvent event) {
+        Transfer transfer = new Transfer();
+        transfer.transfers();
+    }
+
+
+    @FXML
+    void transfer1(ActionEvent event) {
+        Transfer transfer = new Transfer();
+        transfer.receiving();
+    }
+
+    @FXML
+    void goMenu(ActionEvent event) {
+           mainMenu.setVisible(true);
+    }
+
     @FXML
     void one (ActionEvent event1) {
         text.setText(text1);
