@@ -15,6 +15,7 @@ import javafx.stage.Window;
 import javax.imageio.IIOException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 
 public class Disk {
@@ -27,15 +28,11 @@ public class Disk {
             boolean progressSave = true;
 
             try {
-
-
-                DirectoryChooser directoryChooser = new DirectoryChooser();
-                directoryChooser.setTitle("Выберите папку");
-                Window window = new Stage();
-                File selectedDirectory = directoryChooser.showDialog(window);
+                String projectPath = Paths.get("").toAbsolutePath().toString();
+                File selectedDirectory = new File(projectPath + "\\dataRecords");
                 directoryPath = selectedDirectory.toString();
-
                 File file = new File(directoryPath);
+
                 if (selectedDirectory != null && selectedDirectory.isDirectory()) {
                     File[] files = selectedDirectory.listFiles();
                     if (files != null) {
