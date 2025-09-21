@@ -30,11 +30,13 @@ public class Disk {
             try {
                 String projectPath = Paths.get("").toAbsolutePath().toString();
                 File selectedDirectory = new File(projectPath + "\\dataRecords");
+                File directory = new File(projectPath + "\\dataPhoto");
                 directoryPath = selectedDirectory.toString();
                 File file = new File(directoryPath);
 
                 if (selectedDirectory != null && selectedDirectory.isDirectory()) {
                     File[] files = selectedDirectory.listFiles();
+                    File[] files2 = directory.listFiles();
                     if (files != null) {
                         for (File fileTest : files) {
                             ProgressListener progressListener = new ProgressListener() {
@@ -55,7 +57,6 @@ public class Disk {
 
                             if (fileTest != null) {
                                 try {
-                                    String linkPath = "https://cloud-api.yandex.net/v1/disk/resources/upload?path=" + url + "&overwrite=true";
                                     restClient.uploadFile(restClient.getUploadLink("dima-diary/" + fileTest.getName(), true), false, fileTest, progressListener);
 
                                 } catch (Exception e) {
@@ -69,11 +70,45 @@ public class Disk {
                                 alert.showAndWait();
                             }
                         }
-                    } else {
+                    }
+                    else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Получить файлы из папки");
                         alert.showAndWait();
                     }
-                } else {
+                    for (File fileTest : files2) {
+                        ProgressListener progressListener = new ProgressListener() {
+                            @Override
+                            public void updateProgress(long l, long l1) {
+
+                            }
+
+                            @Override
+                            public boolean hasCancelled() {
+                                return false;
+                            }
+                        };
+
+                        Credentials credentials = new Credentials("dima.kamensky.2012", token);
+                        RestClient restClient = new RestClient(credentials);
+
+
+                        if (fileTest != null) {
+                            try {
+                                restClient.uploadFile(restClient.getUploadLink("dima-diary/" + fileTest.getName(), true), false, fileTest, progressListener);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                progressSave = false;
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Сохранить файл: " + fileTest.getName() + " не удалось");
+                                alert.showAndWait();
+                            }
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Файл отсутствует или поврежден");
+                            alert.showAndWait();
+                        }
+                    }
+                }
+                 else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Папка отствует или повреждена");
                     alert.showAndWait();
                 }
