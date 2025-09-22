@@ -158,11 +158,10 @@ public class HelloController {
 
     @FXML
     void saveToDisk(ActionEvent event) {
-
+        diskMenu.setVisible(true);
     }
     @FXML
     void saveData(ActionEvent event) {
-
         Disk disk = new Disk();
         disk.saveToDisk(userToken.getText(), userDisk.getText() , userPath.getText());
     }
@@ -215,6 +214,7 @@ public class HelloController {
     @FXML
     void goMenu(ActionEvent event) {
            mainMenu.setVisible(true);
+           diskMenu.setVisible(false);
     }
 
     @FXML

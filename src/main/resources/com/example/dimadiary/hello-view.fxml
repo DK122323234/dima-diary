@@ -135,7 +135,7 @@
          </children>
       </Pane>
       <Button fx:id="one" layoutX="355.0" layoutY="329.0" mnemonicParsing="false" onAction="#one" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ADD8E6;" visible="false" />
-      <Pane fx:id="diskMenu" prefHeight="637.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;">
+      <Pane fx:id="diskMenu" prefHeight="637.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF;" visible="false">
          <children>
             <TextField fx:id="userDisk" layoutX="264.0" layoutY="124.0" prefHeight="46.0" prefWidth="283.0" />
             <TextField fx:id="userPath" layoutX="262.0" layoutY="251.0" prefHeight="46.0" prefWidth="283.0" />
