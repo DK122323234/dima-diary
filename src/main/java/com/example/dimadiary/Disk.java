@@ -19,11 +19,10 @@ import java.nio.file.Paths;
 
 
 public class Disk {
-    public void saveToDisk() {
+    public void saveToDisk(String token, String login, String path) {
         String directoryPath;
 
-            String token = "y0__xDFyZvRBxjq6Dkgz7y8mhTFsodHmQQ5LLn997ZlNZRGDF_V1A";
-            String url = "disk:/дима";
+
 
             boolean progressSave = true;
 
@@ -51,19 +50,24 @@ public class Disk {
                                 }
                             };
 
-                            Credentials credentials = new Credentials("dima.kamensky.2012", token);
+                            Credentials credentials = new Credentials(login, token);
                             RestClient restClient = new RestClient(credentials);
 
 
                             if (fileTest != null) {
                                 try {
-                                    restClient.uploadFile(restClient.getUploadLink("dima-diary/" + fileTest.getName(), true), false, fileTest, progressListener);
+                                    System.out.println(token);
+                                    System.out.println(login);
+                                    System.out.println(path);
+
+                                    restClient.uploadFile(restClient.getUploadLink(path + fileTest.getName(), true), false, fileTest, progressListener);
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     progressSave = false;
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Сохранить файл: " + fileTest.getName() + " не удалось");
                                     alert.showAndWait();
+                                    System.out.println(e.getMessage());
                                 }
                             } else {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Файл отсутствует или поврежден");
@@ -88,16 +92,16 @@ public class Disk {
                             }
                         };
 
-                        Credentials credentials = new Credentials("dima.kamensky.2012", token);
+                        Credentials credentials = new Credentials(login, token);
                         RestClient restClient = new RestClient(credentials);
 
 
                         if (fileTest != null) {
                             try {
-                                restClient.uploadFile(restClient.getUploadLink("dima-diary/" + fileTest.getName(), true), false, fileTest, progressListener);
+                                restClient.uploadFile(restClient.getUploadLink(path + fileTest.getName(), true), false, fileTest, progressListener);
 
                             } catch (Exception e) {
-                                e.printStackTrace();
+                           System.out.println(e.getMessage());
                                 progressSave = false;
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Сохранить файл: " + fileTest.getName() + " не удалось");
                                 alert.showAndWait();
@@ -113,7 +117,7 @@ public class Disk {
                     alert.showAndWait();
                 }
                 if (progressSave) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Сохронение прошло успешно!");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Сохранение прошло успешно!");
                     alert.showAndWait();
                 }
             } catch (RuntimeException e) {

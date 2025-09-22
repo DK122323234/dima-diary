@@ -142,12 +142,29 @@ public class HelloController {
     @FXML
     private Button backToMenu;
 
+    @FXML
+    private TextField userDisk;
+
+    @FXML
+    private TextField userPath;
+
+    @FXML
+    private TextField userToken;
+
+    @FXML
+    private Pane diskMenu;
+
 
 
     @FXML
     void saveToDisk(ActionEvent event) {
-      Disk disk = new Disk();
-      disk.saveToDisk();
+
+    }
+    @FXML
+    void saveData(ActionEvent event) {
+
+        Disk disk = new Disk();
+        disk.saveToDisk(userToken.getText(), userDisk.getText() , userPath.getText());
     }
 
 
